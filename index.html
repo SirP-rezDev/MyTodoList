@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List || SirP-rezDev</title>
+  <style>
+    #div_A {
+      height: 90px;
+      width: auto;
+      background-color: gold;
+      margin-bottom: 8%;
+      box-shadow: 0px 10px 10px gray;
+    }
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: maroon;
+    }
+    #h1 {
+      margin-top: 0;
+      padding: 20px;
+      text-align: center;
+      color: maroon;
+      text-shadow: 0px 10px 8px gray;
+    }
+    #div_B {
+      height: 400px;
+      width: 360px;
+      background-color: darkgoldenrod;
+      margin: 0 auto;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
+    #input {
+      border: 0;
+      border-radius: 10px;
+      height: 20px;
+      padding: 10px;
+      margin-left: 20px;
+      width: 200px;
+      transition:  all 0.3s ease;
+      box-shadow: 0px 10px 8px gray;
+      color: darkgoldenrod;
+    }
+    #input:hover {
+        width: 220px;
+        height: 40px;
+        font-size: 18px;
+    }
+    #buttons {
+      height: 40px;
+      width: 50px;
+      border-radius: 10px;
+      border: 0;
+      font-size: 15px;
+    }
+    #notes {
+      margin-top: 20px;
+    }
+    .note {
+      background-color: lightyellow;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .note button {
+      margin-left: 10px;
+      border: 0;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    #foot {
+        text-align: center;
+        color: whitesmoke;
+        font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="div_A">
+    <h1 id="h1">Todo List!</h1>
+  </div>
+  <div id="div_B">
+    <h2 id="h1">Notes</h2>
+    <input id="input">
+    <button id="buttons" onclick="addNote()">Add</button>
+    <div id="notes"></div>
+  </div>
+  <script>
+    function addNote() {
+      const input = document.getElementById('input');
+      const noteText = input.value.trim();
+      if (noteText !== '') {
+        const notes = document.getElementById('notes');
+        const note = document.createElement('div');
+        note.className = 'note';
+        note.innerHTML = `
+          <span>${noteText}</span>
+          <div>
+            <button onclick="editNote(this)">Edit</button>
+            <button onclick="deleteNote(this)">Delete</button>
+          </div>
+        `;
+        notes.appendChild(note);
+        input.value = '';
+      }
+    }
+
+    function deleteNote(button) {
+      const note = button.parentNode.parentNode;
+      note.remove();
+    }
+
+    function editNote(button) {
+      const note = button.parentNode.parentNode;
+      const noteText = note.querySelector('span').innerText;
+      const newNoteText = prompt('Edit your note:', noteText);
+      if (newNoteText !== null && newNoteText.trim() !== '') {
+        note.querySelector('span').innerText = newNoteText.trim();
+      }
+    }
+  </script>
+</body>
+<footer>
+    <p id="foot">&copy; SirP-rezDev Copyright</p>
+</footer>
+</html>
